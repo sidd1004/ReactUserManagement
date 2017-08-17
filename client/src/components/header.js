@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
 
 class Header extends Component {
 
@@ -40,4 +39,4 @@ function mapStateToProps(state) {
     }
 };
 
-export default withRouter(connect(mapStateToProps)(Header)); 
+export default connect(mapStateToProps)(Header); 

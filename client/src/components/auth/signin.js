@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { signinUser } from '../../actions';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 
 class Signin extends Component {
 
@@ -68,4 +67,4 @@ function mapStateToProps(state) {
 
 export default reduxForm({
     form: 'SignInFields'
-})(withRouter(connect(mapStateToProps, { signinUser })(Signin)));
+})(connect(mapStateToProps, { signinUser })(Signin));
