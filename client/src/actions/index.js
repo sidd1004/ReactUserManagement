@@ -17,12 +17,27 @@ export function signinUser(values, callback) {
                 localStorage.setItem('token', response.data.token);
                 callback();
             })
+            .catch(response => {
+                dispatch(authError(response.data.error));
+            })
+    }
+}
+//combine with above function
+
+export function signupUser(values, callback) {
+    const { email, password } = values;
+    return function (dispatch) {
+        axios.post(`${ROOT_URL}/signup`, { email, password })
+            .then(response => {
+                dispatch({ type: AUTH_USER });
+                localStorage.setItem('token', response.data.token);
+                callback();
+            })
             .catch(() => {
                 dispatch(authError('Bad Login Info'));
             })
     }
 }
-
 export function authError(error) {
     return {
         type: AUTH_ERROR,
