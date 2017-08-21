@@ -13,20 +13,24 @@ import Home from './components/home';
 import RequireAuth from './components/auth/require_auth';
 import reducers from './reducers';
 
+import {
+  AUTH_USER
+} from './actions/types';
+
+
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(reducers);
+
+const token = localStorage.getItem('token');
+
+if (token) {
+  store.dispatch({ type: AUTH_USER });
+}
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <BrowserRouter>
-      <div>
-        <switch>
-          <Route path="/" component={App} />
-          <Route path="/signin" component={SignIn} />
-          <Route path="/signout" component={SignOut} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/home" component={RequireAuth(Home)} />
-        </switch>
-      </div>
+      <App />
     </BrowserRouter>
   </Provider >
   , document.querySelector('.container'));
