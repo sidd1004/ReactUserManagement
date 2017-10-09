@@ -12,6 +12,8 @@ Client is built on React and contains login interface and protected client side 
 
 ### Starting the Server
 
+Run mongodB before starting the servers
+
 ```
 > npm install
 > npm run dev
